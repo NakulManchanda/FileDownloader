@@ -21,8 +21,18 @@
    Partially downloaded file are deleted- in case of exception while receving response or source fail in middle     
    **TODO: If close our application while running, its not deleting file - added a placeholder - will add this support** 
    
-##Steps
+## Steps
 1. *Read Download Location*   
 2. *Read Sources*      
 3. *Parse source list into array of FileConnInfo object*     
 4. *Process request for each source*    
+
+## Features
+1. Exception Handling    
+2. Logging
+3. Configurable source and download location
+4. Supports SFTP or FTP     
+   a) FTPCient - Wrapper over FtpWebRequest & FtpWebResponse    
+   b) SFTPClient - Wrapper over Sharp.SSH for SFTP     
+5. Streaming strategy to read big files over network      
+6. Partially downloaded files are deleted in case of failure of source

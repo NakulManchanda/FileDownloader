@@ -1,0 +1,8 @@
+﻿ftp://test:test@localhost/a/b/rfc959.txt
+ftp://test:test@localhost/rfc959.txt
+ftp://test:test@localhost/rfc960.txt
+ftp://test:test@localhost/hugeFile.txt
+ftp://test:test@localhost/a/b/srfc959.txt
+sftp://test:test@localhost/srfc959.txt
+sftp://test:test@localhost/a/b/srfc925.txt
+sftp://test:test@localhost/hugeFile.txt

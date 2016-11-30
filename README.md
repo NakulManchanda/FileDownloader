@@ -19,7 +19,7 @@
    If source fail in middle, it gracefully handle this exception, moving to next source in list
 5. **we don't want to have partial data in the final location in any case.**     
    Partially downloaded file are deleted- in case of exception while receving response or source fail in middle     
-   **TODO: IF application fails - added a placeholder - will add this support** 
+   **TODO: If close our application while running, its not deleting file - added a placeholder - will add this support** 
    
 ##Steps
 1. *Read Download Location*   

@@ -38,3 +38,7 @@
 2. *Read Sources*      
 3. *Parse source list into array of FileConnInfo object*     
 4. *Process request for each source*    
+
+
+##Tips
+1. Used Core FTP Server - to setup FTP and SFTP server 

@@ -1,4 +1,16 @@
 # FileDownloader     
+
+## Features
+1. Exception Handling    
+2. Logging
+3. Configurable source and download location
+4. Supports SFTP or FTP     
+   a) FTPCient - Wrapper over FtpWebRequest & FtpWebResponse    
+   b) SFTPClient - Wrapper over Sharp.SSH for SFTP     
+5. Streaming strategy to read big files over network      
+6. Partially downloaded files are deleted in case of failure of source or other exception while reading
+7. Extensible to new client, implementing IDownloader interface
+
 ## How it works
 1. **Specify Download Location**     
    App.Config - Key - "FileDownloadPath"      
@@ -26,13 +38,3 @@
 2. *Read Sources*      
 3. *Parse source list into array of FileConnInfo object*     
 4. *Process request for each source*    
-
-## Features
-1. Exception Handling    
-2. Logging
-3. Configurable source and download location
-4. Supports SFTP or FTP     
-   a) FTPCient - Wrapper over FtpWebRequest & FtpWebResponse    
-   b) SFTPClient - Wrapper over Sharp.SSH for SFTP     
-5. Streaming strategy to read big files over network      
-6. Partially downloaded files are deleted in case of failure of source

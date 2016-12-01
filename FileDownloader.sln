@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.25920.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDownloader", "FileDownloader\FileDownloader.csproj", "{BBF02925-04BF-43ED-B90A-26829A49C319}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileDownloader.Test", "FileDownloader.Test\FileDownloader.Test.csproj", "{82EBFDB4-F115-4B3F-8CBE-67A2CD555887}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBF02925-04BF-43ED-B90A-26829A49C319} = {BBF02925-04BF-43ED-B90A-26829A49C319}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +20,10 @@ Global
 		{BBF02925-04BF-43ED-B90A-26829A49C319}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBF02925-04BF-43ED-B90A-26829A49C319}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBF02925-04BF-43ED-B90A-26829A49C319}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82EBFDB4-F115-4B3F-8CBE-67A2CD555887}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82EBFDB4-F115-4B3F-8CBE-67A2CD555887}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82EBFDB4-F115-4B3F-8CBE-67A2CD555887}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82EBFDB4-F115-4B3F-8CBE-67A2CD555887}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

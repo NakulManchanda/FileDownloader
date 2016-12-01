@@ -21,7 +21,7 @@ namespace FileDownloader
                 File.Delete(f);
                 return true;
             }
-            catch (IOException)
+            catch (Exception ex)
             {
                 //Unable to delete
                 return false;
@@ -66,11 +66,12 @@ namespace FileDownloader
         //Get App settings
         public static string GetAppSetting(string settingStr)
         {
-            var settingVal = ConfigurationManager.AppSettings[settingStr];
+            string settingVal;
+            settingVal = ConfigurationManager.AppSettings[settingStr];
 
             if (settingVal == null)
                 throw new ArgumentNullException($"Missing {settingStr} - not configured");
-
+            
             return settingVal;
         }
 
@@ -79,9 +80,9 @@ namespace FileDownloader
         {
             try
             {
-                //Basic Path Validation
-                Path.GetDirectoryName(filepath);
-                Path.GetFileName(filepath);
+               //Basic Path Validation
+               //File dont have to exist to create a FileInfo Object
+               FileInfo fi = new FileInfo(filepath);
             }
             catch (ArgumentException ex)
             {

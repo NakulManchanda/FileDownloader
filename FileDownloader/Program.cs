@@ -17,6 +17,7 @@ namespace FileDownloader
 
             //AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
 
+
             //Get Download location
             String downloadLocation;
             if(!Helper.TryGetLocationFromConfig("FileDownloadPath",out downloadLocation))
@@ -51,7 +52,7 @@ namespace FileDownloader
             {
                 //Process Sources
                 ProcessSources(downloadLocation, sources);
-            } catch (Exception ex)
+            } catch (Exception)
             {
                 return;
             }
@@ -104,7 +105,7 @@ namespace FileDownloader
 
                     }
                 }
-            }catch(Exception ex)
+            }catch(Exception)
             {
                 Log.Error("Error processing sources");
                 throw;

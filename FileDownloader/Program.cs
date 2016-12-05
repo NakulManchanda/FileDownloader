@@ -16,7 +16,7 @@ namespace FileDownloader
             Log.Info("Start");
 
             //AppDomain.CurrentDomain.ProcessExit += new EventHandler(OnProcessExit);
-
+            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(GlobalExceptionHandler);
 
             //Get Download location
             String downloadLocation;
@@ -51,7 +51,7 @@ namespace FileDownloader
             try
             {
                 //Process Sources
-                ProcessSources(downloadLocation, sources);
+                SimpleFileSourceProcessor.ProcessAllSources(downloadLocation, sources);
             } catch (Exception)
             {
                 return;
@@ -69,48 +69,17 @@ namespace FileDownloader
             Log.Info("Exit");
         }
         */
+        
 
-
-        public static void ProcessSources(string downloadLocation,string[] sources)
+        /*
+        static void GlobalExceptionHandler(object sender, EventArgs args)
         {
-            try
-            {
-                foreach (var src in sources)
-                {
-                    Log.Info($"Download Start: {src}");
-                    FileConnInfo fInfo = null;
-                    try
-                    {
-                        fInfo = new FileConnInfo(src, downloadLocation);
-                        IDownloader downloader = DownloadClientFactory.GetDownloadClient(fInfo);
-                        if (downloader != null)
-                        {
-                            downloader.CreateRequest();
-                            downloader.GetResponse();
-                        }
-
-                        Log.Info($"Download Done: {src} ");
-
-                    }
-                    catch (Exception ex)
-                    {
-                        //Delete Partially Downloaded File 
-                        if (fInfo != null)
-                            Helper.TryToDeleteFile(fInfo.LocalFilePath);
-
-                        Log.Error($"Download Error: {src}", ex);
-                    }
-                    finally
-                    {
-
-                    }
-                }
-            }catch(Exception)
-            {
-                Log.Error("Error processing sources");
-                throw;
-            }
+            Log.Info("Completed with errors");
         }
+        */
+
+
+        
 
 
         public static bool TryGetSources(String fileSourceSetting, String[] args, out string[] sources)

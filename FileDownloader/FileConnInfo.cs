@@ -6,22 +6,28 @@ namespace FileDownloader
 {
     public class FileConnInfo
     {
-
+        public String UniqueId { get; }
         public Uri Url { get; }
+
+        //URI Derived Info
         public String RemoteUrl { get { return Url.OriginalString; } }
+
         public String Scheme { get { return Url.Scheme; } }
         public String Host { get { return Url.Host; } }
         public int Port { get { return Url.Port; } }
-        public String RemoteFilePath { get; }
-        public String RemoteFilename { get; }
 
-        public String LocalBasePath { get; }
-        public String LocalFilePath { get; }
         public String Username { get; private set; }
         public String Password { get; private set; }
-        public String Filename { get; }
+
+        public String RemoteFilePath { get; }
+        public String RemoteFilename { get; }
         public String Extension { get; }
-        public String UniqueId { get; }
+
+        //Local Paths
+        public String LocalBasePath { get; }
+        public String LocalFilePath { get; }
+        public String Filename { get; }
+        
 
         public FileConnInfo(String remoteUrl, String localBasePath)
         {

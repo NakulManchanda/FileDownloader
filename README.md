@@ -9,6 +9,11 @@
 6. Manually tested download strategy - all sequential, parallel and parallel with retry
 7. MyFileDownloader - Big composite file download processor, based on config driven strategy.
 
+##TODOs
+1. Full Test Coverage
+2. More Extensible Network Simulator
+3. Statistics/Speed driven download strategy scheduler
+
 
 ## Features
 1. Exception Handling    

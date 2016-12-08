@@ -1,5 +1,15 @@
 # FileDownloader     
 
+#Latest Changes
+1. Restructured whole project - into separate namespace and folder
+2. DTO - FileConnInfo, Service - Download Client with Factory, Processor - Download Strategy with Factory
+3. Created new configuration object - to have all required config in one place
+4. Test coverage is incomplete, added few more unit test files
+5. Network Simulator still needs to added
+6. Manually tested download strategy - all sequential, parallel and parallel with retry
+7. MyFileDownloader - Big composite file download processor, based on config driven strategy.
+
+
 ## Features
 1. Exception Handling    
 2. Logging
@@ -10,6 +20,7 @@
 5. Streaming strategy to read big files over network      
 6. Partially downloaded files are deleted in case of failure of source or other exception while reading
 7. Extensible to new client, implementing IDownloader interface
+8. Extensible Download Strategy - currently support sequential, parallel, parallel with retry
 
 ## How it works
 1. **Specify Download Location**     

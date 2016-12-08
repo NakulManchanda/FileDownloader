@@ -67,6 +67,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DownloadClientFactory_UnitTests.cs" />
     <Compile Include="FileConnInfo_UnitTests.cs" />
     <Compile Include="Helper_UnitTests.cs" />
     <Compile Include="NetworkSimulation_Tests.cs" />

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using FileDownloader.Processor;
 
 namespace FileDownloader.Test
 {
@@ -16,7 +17,7 @@ namespace FileDownloader.Test
         private static string ExecutingDirPath = AppDomain.CurrentDomain.BaseDirectory;
         private static string DownloadPath = Path.Combine(ExecutingDirPath, "Downloads");
 
-        [Test]
+        //[Test]
         public void Network_BigFileMiddleFailure_NoFileOnDisk()
         {
 
@@ -64,8 +65,12 @@ namespace FileDownloader.Test
             try { Directory.Delete(downloadLocation, true); } catch { };
             try { Directory.CreateDirectory(downloadLocation); } catch { };
 
+           
             //Get File From source
+            /*
+            var mf = new MyFileDownloader();
             FileDownloader.SimpleFileSourceProcessor.ProcessSource(downloadLocation, sourceUrl);
+            */
 
         }
     }

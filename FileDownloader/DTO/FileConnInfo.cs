@@ -1,8 +1,9 @@
-﻿using System;
+﻿using FileDownloader.Utils;
+using System;
 using System.IO;
 using System.Linq;
 
-namespace FileDownloader
+namespace FileDownloader.DTO
 {
     public class FileConnInfo
     {
@@ -35,6 +36,12 @@ namespace FileDownloader
             {
 
                 LocalBasePath = localBasePath;
+
+                if (!Helper.ValidateFilePath(LocalBasePath))
+                {
+                    throw new ArgumentException($"Error no valid local base path {LocalBasePath} for {remoteUrl}");
+                }
+
                 UniqueId = Guid.NewGuid().ToString();
 
                 Uri resultUri;
@@ -44,8 +51,23 @@ namespace FileDownloader
                 }
 
                 Url = resultUri;
+
+
                 RemoteFilePath = Url.AbsolutePath;
+
+                if(!Helper.ValidateFilePath(RemoteFilePath))
+                {
+                    throw new ArgumentException($"Error no valid remote file path {RemoteFilePath} for {remoteUrl}");
+                }
+
                 RemoteFilename = Url.Segments.Last();
+
+                if (!Helper.ValidateFilePath(RemoteFilePath))
+                {
+                    throw new ArgumentException($"Error no valid remote file name {RemoteFilename} for {remoteUrl}");
+                }
+
+
                 Filename = GetFileName(Url, UniqueId);
                 Extension = Path.GetExtension(Filename);
                 LocalFilePath = Path.Combine(LocalBasePath,Filename);
@@ -53,6 +75,13 @@ namespace FileDownloader
                 Username = "";
                 Password = "";
                 SetUserInfo(Url.UserInfo);
+
+                if(Host=="")
+                {
+                    throw new ArgumentException($"Host cannot be blank for {remoteUrl}");
+                }
+
+
             }
             catch
             {
@@ -63,11 +92,6 @@ namespace FileDownloader
 
         private String GetFileName(Uri url,String uniqueId)
         {
-            if(url==null || uniqueId==null)
-            {
-                throw new ArgumentNullException("uri or uniqueId is null");
-            }
-
             return uniqueId + "_" + url.Segments.Last();
         }
 

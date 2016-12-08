@@ -1,8 +1,9 @@
-﻿using log4net;
+﻿using FileDownloader.DTO;
+using log4net;
 using System;
 using Tamir.SharpSsh;
 
-namespace FileDownloader
+namespace FileDownloader.Service
 {
     public class SFTPClient : IDownloader
     {
@@ -23,7 +24,7 @@ namespace FileDownloader
             try
             {
                 _sftp = new Sftp(_fileConnInfo.Host, _fileConnInfo.Username, _fileConnInfo.Password);
-                _sftp.Connect();
+                
             }
             catch (Tamir.SharpSsh.jsch.JSchException ex)
             {
@@ -41,10 +42,17 @@ namespace FileDownloader
         {
             try
             {
+                _sftp.Connect();
+
                 if (_sftp.Connected)
                 {
                     _sftp.Get(_fileConnInfo.RemoteFilePath, _fileConnInfo.LocalFilePath);
                 }
+            }
+            catch (Tamir.SharpSsh.jsch.JSchException ex)
+            {
+                Log.Error(ex.Message);
+                throw;
             }
             catch (Tamir.SharpSsh.jsch.SftpException ex)
             {

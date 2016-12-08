@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using FileDownloader.DTO;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,6 +46,54 @@ namespace FileDownloader.Test
             Assert.AreEqual(filename, fi.Filename);
             Assert.AreEqual(".txt",fi.Extension);
             
+        }
+
+
+        [Test]
+        [TestCase("test@localhost/a/b/srfc959.txt", testDownloadLoc)]
+        [TestCase("test:test@localhost/a/b/srfc959.txt", testDownloadLoc)]
+        public void Constructor_IncompleteUrls_Throws(String remoteUri, String baseDownloadLoc)
+        {
+
+            ActualValueDelegate<object> testDelegate =
+            () =>
+            {
+                return new FileConnInfo(remoteUri, baseDownloadLoc);
+            };
+
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
+        }
+
+
+        [Test]
+        [TestCase("myftp://test:test@localhost/a/b/srfc9*59.txt", testDownloadLoc)]
+        [TestCase("myftp://test:test@localhost/a/b/srfc9:59.txt", testDownloadLoc)]
+        public void Constructor_InvalidIncompleteUrls_Throws(String remoteUri, String baseDownloadLoc)
+        {
+
+            ActualValueDelegate<object> testDelegate =
+            () =>
+            {
+                return new FileConnInfo(remoteUri, baseDownloadLoc);
+            };
+
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
+        }
+
+
+        [Test]
+        [TestCase("myftp://test:test@localhost/a/b/srfc9*59.txt", "Down<Loads")]
+        [TestCase("myftp://test:test@localhost/a/b/srfc9*59.txt", "Down|Loads")]
+        public void Constructor_IllegalDownloadPath_Throws(String remoteUri, String baseDownloadLoc)
+        {
+
+            ActualValueDelegate<object> testDelegate =
+            () =>
+            {
+                return new FileConnInfo(remoteUri, baseDownloadLoc);
+            };
+
+            Assert.That(testDelegate, Throws.TypeOf<ArgumentException>());
         }
     }
 }

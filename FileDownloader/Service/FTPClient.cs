@@ -1,9 +1,10 @@
-﻿using log4net;
+﻿using FileDownloader.DTO;
+using log4net;
 using System;
 using System.IO;
 using System.Net;
 
-namespace FileDownloader
+namespace FileDownloader.Service
 {
     public class FTPClient : IDownloader
     {
@@ -42,6 +43,7 @@ namespace FileDownloader
                 _request.UsePassive = UsePassive;
                 _request.UseBinary = UseBinary;
                 _request.Credentials = new NetworkCredential(_fileConnInfo.Username, _fileConnInfo.Password);
+                //_request.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNo‌​Store);
 
             }
             catch (Exception ex)
@@ -58,11 +60,9 @@ namespace FileDownloader
                 //FtpWebResponse
                 FtpWebResponse response = (FtpWebResponse)_request.GetResponse();
 
-                //Stream
-                Stream responseStream = response.GetResponseStream();
-                StreamReader reader = new StreamReader(responseStream);
-
-                //Open FileStream
+                //Stream Open FileStream
+                using (Stream responseStream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(responseStream))
                 using (FileStream writer = new FileStream(_fileConnInfo.LocalFilePath, FileMode.Create))
                 {
 
@@ -79,9 +79,9 @@ namespace FileDownloader
                         readCount = responseStream.Read(buffer, 0, bufferSize);
                     }
                 }
-
-                reader.Close();
+                
                 response.Close();
+                
             }
             catch (Exception ex)
             {

@@ -97,15 +97,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DownloadClientFactory.cs" />
-    <Compile Include="FileConnInfo.cs" />
-    <Compile Include="FTPClient.cs" />
-    <Compile Include="Helper.cs" />
-    <Compile Include="IDownloader.cs" />
+    <Compile Include="Configuration\ConfigSettings.cs" />
+    <Compile Include="Configuration\IConfigSettings.cs" />
+    <Compile Include="Processor\DownloadStrategyFactory.cs" />
+    <Compile Include="Processor\MyFileDownloader.cs" />
+    <Compile Include="Processor\AbstractFileDownloader.cs" />
+    <Compile Include="Processor\ParallelRetryFileDownloader.cs" />
+    <Compile Include="Processor\ParallelFileDownloader.cs" />
+    <Compile Include="Service\DownloadClientFactory.cs" />
+    <Compile Include="DTO\FileConnInfo.cs" />
+    <Compile Include="Service\FTPClient.cs" />
+    <Compile Include="Utils\Helper.cs" />
+    <Compile Include="Service\IDownloader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SFTPClient.cs" />
-    <Compile Include="SimpleFileSourceProcessor.cs" />
+    <Compile Include="Service\SFTPClient.cs" />
+    <Compile Include="Processor\SequentialFileDownloader.cs" />
+    <Compile Include="Utils\Retry.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -131,6 +139,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

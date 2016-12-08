@@ -1,5 +1,5 @@
-﻿namespace FileDownloader
-{
+﻿namespace FileDownloader.Service
+{ 
     public interface IDownloader
     {
         void CreateRequest();

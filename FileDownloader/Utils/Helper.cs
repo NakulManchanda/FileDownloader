@@ -2,13 +2,15 @@
 using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
 
-
-namespace FileDownloader
+namespace FileDownloader.Utils
 {
     public static class Helper
     {
         private static readonly ILog Log = LogManager.GetLogger(typeof(Helper));
+        private static readonly String ExecutingDir = AppDomain.CurrentDomain.BaseDirectory;
+
 
 
         //Quickly create new file using - fsutil file createnew hugeFile.txt 2000000000
@@ -54,7 +56,7 @@ namespace FileDownloader
                 throw new ArgumentNullException($"filelocation location cannot be null");
             }
 
-            filelocation = filelocation.Replace("AppPath\\", AppDomain.CurrentDomain.BaseDirectory);
+            filelocation = filelocation.Replace("AppPath\\", ExecutingDir);
 
             if (!ValidateFilePath(filelocation))
                 throw new ArgumentException($"Illegal Path: {filelocation}");
@@ -72,7 +74,7 @@ namespace FileDownloader
             if (settingVal == null)
                 throw new ArgumentNullException($"Missing {settingStr} - not configured");
             
-            return settingVal;
+            return settingVal.Trim();
         }
 
         //Validate File Path for illegal characters
@@ -98,7 +100,23 @@ namespace FileDownloader
             return true;
         }
 
-       
+        public static string[] GetAllLinesFromFile(string filepath)
+        {
+            string[] lines;
+            try
+            {
+                lines = (from line in File.ReadAllLines(filepath)
+                           select line.Trim()).ToArray();
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex.Message);
+                Log.Error($"Error reading sources file");
+                throw;
+            }
+
+            return lines;
+        }
 
     }
 }

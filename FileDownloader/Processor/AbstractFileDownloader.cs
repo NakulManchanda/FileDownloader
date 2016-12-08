@@ -1,31 +1,51 @@
-﻿using log4net;
+﻿using FileDownloader.DTO;
+using FileDownloader.Service;
+using FileDownloader.Utils;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FileDownloader
+namespace FileDownloader.Processor
 {
-    public class SimpleFileSourceProcessor
+    public abstract class AbstractFileDownloader
     {
-
-        private static readonly ILog Log = LogManager.GetLogger(typeof(SimpleFileSourceProcessor));
-
-        public static void ProcessAllSources(string downloadLocation, string[] sources)
+        protected ILog Log
         {
+            get { return LogManager.GetLogger(GetType()); }
+        }
+
+        public virtual string DownloadLocation { get; protected set; }
+        public virtual string[] Sources { get; protected set; }
+
+
+        protected AbstractFileDownloader()
+        {
+
+        }
+
+        public AbstractFileDownloader(String downloadLocation, string[] sources)
+        {
+             Log.Debug($"constructor abstract file downloader");
+
             if (downloadLocation == null) throw new ArgumentNullException("Download Location can't be null");
             if (sources == null) throw new ArgumentNullException("List of sources can't be null. Nothing to process.");
 
-            foreach (var src in sources)
-            {
-                ProcessSource(downloadLocation, src);
-            }
+            DownloadLocation = downloadLocation;
+            Sources = sources;
         }
 
-        public static void ProcessSource( string downloadLocation, string src)
+        public abstract void  ProcessAllSources();
+
+        public virtual void ProcessSource(string downloadLocation, string src)
         {
             Log.Info($"Download Start: {src}");
+
+            if (downloadLocation == null) throw new ArgumentNullException("Download Location can't be null");
+            if (src == null) throw new ArgumentNullException("Source can't be null. Nothing to process.");
+
             FileConnInfo fInfo = null;
             try
             {
@@ -54,5 +74,7 @@ namespace FileDownloader
                 Log.Error($"Download Error: {src}", ex);
             }
         }
+
+
     }
 }
